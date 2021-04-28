@@ -17,6 +17,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+import Switch from "@material-ui/core/Switch";
 
 const drawerWidth = 240;
 
@@ -80,9 +81,12 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  switch: {
+    marginLeft: "auto",
+  },
 }));
 
-const Main = ({ children }) => {
+const Main = ({ isDarkMode, handleThemeChange, children }) => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -104,7 +108,12 @@ const Main = ({ children }) => {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar>
+        <Toolbar
+          style={{
+            display: "flex",
+            flexDirection: "row",
+          }}
+        >
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -119,6 +128,11 @@ const Main = ({ children }) => {
           <Typography variant="h6" noWrap>
             Cabbage Forums
           </Typography>
+          <Switch
+            checked={isDarkMode}
+            onChange={handleThemeChange}
+            className={classes.switch}
+          />
         </Toolbar>
       </AppBar>
       <Drawer
